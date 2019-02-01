@@ -43,7 +43,7 @@ dir("mlhelper/R")
 ```
 
 
-```{r ex14}
+```{r package}
 #' mlhelper: Helper functions for EDA and ml
 #'
 #' Generate custom data frame summaries
@@ -85,7 +85,7 @@ use_package("dplyr", pkg = "mlhelper")
 # Add purrr as a dependency to the DESCRIPTION file
 use_package("purrr", pkg = "mlhelper")
 
-# Add tidyr as an imported dependency to the DESCRIPTION file
+# Add moments as an imported dependency to the DESCRIPTION file
 use_package("moments", pkg = "mlhelper")
 ```
 
@@ -103,6 +103,7 @@ dir()
 
 
 # CHAPTER 2 :: functions
+
 ```{r numeric.summary}
 # create numeric summary for a df$column in df format
 numeric.summary <- function(x, na.rm) {
@@ -127,7 +128,7 @@ numeric.summary <- function(x, na.rm) {
 ```
 
 
-```{r}
+```{r run numeric.summary}
 numeric.summary(iris$Sepal.Length, na.rm=TRUE)
 ```
 
@@ -143,7 +144,7 @@ df.numeric.summary <- function(x, na.rm = TRUE){
 
 ```
 
-```{r}
+```{r run df summary}
 df.numeric.summary(iris, na.rm = TRUE)
 ```
 
