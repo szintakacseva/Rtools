@@ -1,0 +1,405 @@
+# current dir is empty?
+rm(list = ls())
+
+# apply a function for models
+m1<-lm(Petal.Length ~ 1, data=iris)
+ m2 <- lm(Petal.Length ~ Sepal.Length, data=iris)
+models <- paste0("m", 1:2)
+ 
+models < proposed.model
+sapply(models, function(x) model.summaries(x))
+
+
+# get the name of a df, not works on models 
+df = deparse(substitute(df))
+
+# remove predictors
+lm(y ~ . - age - weight, data=mydata)
+
+# not in 
+df <- dft %>%
+  filter(!(column %in% c('value1', 'value2')))
+  
+# check factors with one level
+which(sapply(df, function(x) length(unique(x))<2))
+
+# reduce the correlationmatrix with the colliniar features
+library(caret)
+df1 <- df
+df2 = cor(df1)
+hc = findCorrelation(df2, cutoff=0.3) # putt any value as a "cutoff" 
+hc = sort(hc) 
+hc
+reduced.df = df1[,-c(hc)]
+
+#using dplyr inside a function
+my_mutate <- function(df,x) {
+  df %>%
+    select(.data$cyl) %>%
+    slice(1:4) %>%
+    mutate(cyl2 = .data$cyl + (!! x))
+}
+my_mutate(mtcars,5)
+
+# check for missing values for a df
+sapply(df, anyNA)
+
+#rank a df on group
+by_species <- iris %>% arrange(Species, Sepal.Length) %>%
+    group_by(Species) %>% 
+    mutate(rank = rank(Sepal.Length, ties.method = "first"))
+	
+#adding popup to a leaflet
+df <- df()
+popup =  ~(paste("<b>",df$City,"</b>","<br>","Passagers:",df$PAX, "<br>","Flights:", df$ATM)),
+
+# flexdashbord, leaflet, shiny in df for markers needs to be a count()
+renderLeaflet({
+  
+  df <- reactive.df()
+  
+  countriesonmap <-  df %>%
+    group_by(City,Year,lon,lat) %>%
+    count() %>%
+    leaflet() %>%
+    addTiles() %>%
+    addCircles(radius = ~n)
+})
+
+# R Error in get: object '.xts_chob' not found
+leaflet::addLegend
+
+#remove observations with one or more missing values
+nomiss_df %>% 
+     drop_na() %>% 
+     arrange(desc(column))
+	 
+# examine the type of varaibles
+sapply(df, class)
+
+# check for missing values
+sapply(df, anyNA)
+
+#sort unique values in a df column
+unique_values <- sort(unique(df$column))
+
+# check the NAs in a df
+colSums(sapply(df, is.na))
+
+#add the new level "None" and replace missing values with "None" for factors in a df
+for (feature in colnames(df)) {
+    levels(df[[feature]]) = c(levels(df[[feature]]), "None")
+    df[feature][is.na(df[feature])] <- "None"
+}
+
+# extract columns classes from a df
+df_classes <- sapply(df, class)
+
+# add rowid as first column
+df <- cbind(col_name = rownames(df), df) # add rowid as first column
+
+# manually creating df for DataCamp
+screen.capture.to.df <- function(mystring){
+  # remove row numbers of the form [12]
+mystring1 = gsub("[[+[0-9]+[]]+", "",mystring)
+# replace newlines to a space
+mystring2 = str_replace_all(mystring1, "[\r\n]" , " ")
+# remove the leading ws
+mystring3 <- trimws(mystring2)
+# replace spaces with a single space
+mystring4 <- gsub("[[:blank:]]+", " ", mystring3)
+# transform a string into a numeric list
+mylist <- as.numeric(strsplit(mystring4, " ")[[1]])
+}
+
+# extracting columns from a df
+features <- c("col1", "col2", "col3")
+df <- df[, features]
+
+# means of cols in a df
+colMeans(df)
+
+# remove row numbers of the form [12]
+y1 = gsub("[[+[0-9]+[]]+", "", y)
+
+# replace newlines to a space
+y2 = str_replace_all(y1, "[\r\n]" , " ")
+
+# remove the leading ws
+y3 <- trimws(y2)
+
+# replace spaces with a single space
+y4 <- gsub("[[:blank:]]+", " ", y3)
+
+# transform a string into a numeric list
+y5 <- as.numeric(strsplit(y4, " ")[[1]])
+
+# removes newlines to a space
+x1 = stringr::str_replace_all(x, "[\r\n]" , " ")
+
+# replace spaces with a single comma
+x2 <- gsub("[[:blank:]]+", ",", x1)
+
+# transform a string into a numeric list
+x3 <- as.numeric(strsplit(x2, ",")[[1]])
+
+#reorder boxplots by mean(or sd or other statistical metric)
+ggplot(df, aes(x=reorder(df$column_to_order, df$column_order_on, mean), y=df$column_order_on))+
+  geom_boxplot()
+
+# determine outliers and and high leverage points from an lm model
+lm_model = lm(y ~ x, df)
+df$residuals <- lm_model$residuals  ## Add the residuals to the data.frame
+df_o <- order(df$residuals^2, decreasing=T) ## Reorder to put largest first
+df[df_o[1:3],] ## Return results
+colNames = c("col1", "col2", "col3", "col4") # colnames vector 
+df[df_o[1:3],colNames] ## Return just the values of the colNames
+
+# dropping a column from df
+df <- select(df, -c("col1", "col2"))
+
+#columns with the highest number of missing observations from a df
+sort(colSums(is.na(df)), decreasing = TRUE)
+
+# changing the rows and columns in a df
+df <- t(df)
+
+# Replace the two-letter codes in topic: votes_tidied
+df_tidied <- df_gathered %>%
+  mutate(topic = recode(topic,
+                        me = "Palestinian conflict",
+                        nu = "Nuclear weapons and nuclear material",
+                        di = "Arms control and disarmament",
+                        hr = "Human rights",
+                        co = "Colonialism",
+                        ec = "Economic development"))
+						
+# ERROR in mutate_impl(.data, dots) : Evaluation error: varaible lengts differ, ungrouping the df resolved the problem
+by_year_country <- ungroup(by_year_country)
+
+
+# removing all NAs
+df2 <- df1[complete.cases(df1),]
+
+# calculating the percentage
+by_country <- votes_processed %>%
+  group_by(country) %>%
+  summarize(total = n(),
+            percent_yes = mean(vote == 1))
+
+# df without a column and just a column df
+trainset[, -3], y = trainset[, 3]
+
+#nested multiple if-else construction
+ifelse(<condition>, <yes>, ifelse(<condition>, <yes>, <no>))
+iris_df[, "y"] <- ifelse(iris_df$Species == 'setosa', 1, ifelse(iris_df$Species == 'versicolor' ,0, -1))
+
+#delete previously saved R workspace
+unlink(".RData") 
+
+#spread df on multiple columns
+recast(df, Weekday ~ Month  + variable)
+
+#ordering factors for ggplot2, reorder country by mean of working_hours
+library(forcats)
+fct_reorder(country, working_hours, last))
+
+# ordering factors on a vector
+data_weekdaily$theDate <- factor(data_weekdaily$theDate, levels= c("Monday", 
+    "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+
+# ordering a dataframe according to a vector
+funnel_maintable[match(c("StartedSessions", "Abandonments", "DirectSales", "OnsiteDisplays", "OnsiteClicksToContinue", "OnsiteClicksNotToContinue", "CompletedPurchases", "CompletedPurchases_value"), funnel_maintable$step),]
+
+# ordering a df for plotting	
+data_weekdaily <- data_weekdaily[order(data_weekdaily$theDate), ]
+
+funnel_main$step <- factor(funnel_main$step, levels= c("purchase", "click", "display", "start"))
+funnel_main <- funnel_main[order(funnel_main$step, decreasing = T), ]
+
+#subsetting
+total <- subset(funnel_main, rank==1)$value
+
+#formatting with new line
+title <- c("First~line \n italic('wait, a second')\n integral(f(x)*dx, a, b)")
+
+#position title to center
+ + theme(plot.title = element_text(hjust = 0.5))
+
+# Changing the size and margins of the title and subtitles to give the title, subttitle adjusting some options.
+theme(plot.title=element_text(margin=margin(b=0), size = 20), plot.subtitle=element_text(margin=margin(t=5, b = 10)))
+ 
+# Create contingency table with table()
+DF <- table(adult$RBMI, adult$SRAGE_P)
+
+# Use apply on DF to get frequency of each group
+DF_freq <- lapply(DF, function(x) x/sum(x)) 
+#or a better solution
+mutate(percent = round(column / sum(column),3)*100)
+
+#adding a total row to a data frame
+df[4,] = c("Total", colSums(df[,2:3]))
+
+#removing a particular legend
+guides(alpha = FALSE) +  # Alpha legend removed
+
+
+#Using scale_x_discrete (limits = ...) to specify the order of bars.
+positions <- c("Goalkeeper", "Defense", "Striker")
+p <- ggplot(theTable, aes(x = Position)) + scale_x_discrete(limits = positions)
+
+#Using scale_x_discrete (limits = ...) to specify label format, to override the default scientific format.
+scale_y_continuous(labels = scales::comma) +
+
+#to have a custom legend based on the colors
+scale_colour_identity(guide = 'legend',labels = c('value', 'trafic')) +
+
+#To get rid of the black, or fill background in the legend
+scale_colour_manual(name="Error Bars",values=cols, 
+                      guide = guide_legend(override.aes=aes(fill=NA))) + 
+
+#If you make bar graphs with an outline (by setting colour=”black”), it will draw a slash through the colors in the legend. To remove them
+geom_bar(....., show.legend=FALSE) +
+
+#working with legends
+http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/
+
+## label_bquote() makes it easy to construct math expressions
+p + facet_grid(. ~ vs, labeller = label_bquote(cols = alpha ^ .(vs)))
+
+## mix multiple plots on same page
+http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+
+#get old theme in order to restore it later
+old <- theme_set(theme_bw())
+old2 <- theme_get()
+theme_set(old)
+
+# adding customised axis breaks
+scale_x_continuous(breaks = seq(1900, 2015, by = 20)) +
+scale_y_continuous(limits = c(3, 6), breaks = seq(3, 6, by = 1))
+  
+# setting the margin of the plot
+theme(plot.margin = margin(2, 2, 2, 2, "cm"))
+
+# reorder the items of the legend
+geom_line(aes(x = as.numeric(AbrWeekday), y = Duration, color=factor(Sessiontimes)),  size = 1.2)+
+  scale_color_discrete(breaks=c("MaxSessiontime","AvgSessiontime","MinSessiontime"))+
+  
+# two lines subtitle
+labs( title = paste("Onsite Recoveries vs Direct sales"),
+      subtitle = paste("Client:", params$clientid, "\n",  "Year: ",params$Year)
+      )+
+	  
+#  determine the value of element at the given percentages. For example 50% of elements are less than 120
+percents <- c(0, 0.25, 0.5, 0.7, 0.9, 0.95, 0.97, 1)
+df_percents <- quantile(d_kpi$AOV, probs = percents)
+
+d_AOV <- data.frame(percent_rank(d_kpi$AOV))
+
+# custom order recency, frequency, monetary columns 
+lrecency <- c("recent", "some_time_ago", "long_time_ago")
+d_rfm$recency_distr <- factor(d_rfm$recency_distr, levels=lrecency)
+
+# What's the proportion of grades below or equal to 64 in the last 5 years?
+mean(last_5 <= 64) 
+
+# What's the proportion of grades in your class that is average?
+mean(my_class >= 70 & my_class <= 85)
+
+# Create top_grades
+top_grades <- my_class[my_class >=85]
+
+# Use list subsetting to print the details part of 11th logs entry
+logs[[11]]$details
+
+# Print the class of the timestamp component of the first entry
+class(logs[[1]]$timestamp)
+
+#get the elements from a complex data structure
+logs[[i]]$details$message
+
+#adding rowid as column to a data frame
+df_rank <- tibble::rowid_to_column(df_rank, "segment")
+
+# adding a column to a data frame on a specific space 
+df_rank <- add_column(df_rank, value = as.integer(paste0(df_rank$r_rank, df_rank$f_rank, df_rank$m_rank,sep = "")), .after = 2)
+
+# rename subset of column values
+levels(d_result$segment)[levels(d_result$segment)=="4"] <- "Hibernating"
+
+# multiple if_else structure
+df_rank %>%
+  select(everything()) %>%
+  mutate(
+    segment = case_when(
+      m_rank == max(m_rank) ~ "Champions",
+      r_rank == min(r_rank) ~ "Hibernating",
+      TRUE                      ~  "other"
+    )
+  )
+
+# mutate ifelse
+df %>%
+  mutate(new.column = ifelse(column>0, TRUE, FALSE))
+ 
+#rename last column
+names(df)[length(names(df))]<-"cluster"
+
+#set the limits of the axis
+scale_y_continuous(limits=c(0,total))+
+
+# taking dynamically the properties of a df
+log$property # won't work
+log[[property]] # will work
+
+# chained selection :: message is a property of details
+property = c("details", "message")
+extract_info(logs, property = c("details", "message"))
+x$details$location
+
+# anonymous function
+a <- list(3, 2, 5)
+lapply(a, function(x) { 2 * x })
+lapply(logs, function(x) {x$timestamp})
+lapply(logs, `[[`, "timestamp")
+
+# sapply convers lapply output to a vector
+
+# selecting the message element of details
+sapply(logs, `[[`, c("details", "message"))
+
+# vapply
+vapply(logs, `[[`, c("details", "message"), FUN.VALUE = character(1))
+
+# Return vector with uppercase version of message elements in log entries
+toupper(vapply(logs, `[[`, c("details", "message"), FUN.VALUE = character(1)))
+
+# 
+is_man <- grepl(", Mr\\.", pass_names)
+
+#
+gsub("(a|b|c)", "_\\1_", "all cool brother")
+
+# date format
+dob1d <- as.Date(dob1)
+dob2d <- as.Date(dob2, format = "%B %d, %Y")
+
+# contingency table definition
+# way to represent the total counts of observations that fall into each combination of the levels of categorical variables.
+
+# remove level with few elements
+comics <- comics %>%
+  filter(align != "Reformed Criminals") %>%
+  droplevels()
+  
+#rename a coloumn in a df
+names(df)[names(df) == 'old.var.name'] <- 'new.var.name'
+
+#set plot margin to 0, useful in multiplot
+plot.margin = unit(c(0, 0, 0, 0), "cm")
+
+# determine the frequency by grouping two factors
+qt <- as.data.frame(with (d_status_quarterly, table(Quarter, AbrWeekday)))
+
+
