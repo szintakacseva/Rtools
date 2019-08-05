@@ -1,3 +1,12 @@
+# samples Date type as a column in a df
+start_date <- as.Date('2018-08-01')  
+end_date <- as.Date('2018-08-31')   
+df$Date <- as.Date(sample( as.numeric(start_date): as.numeric(end_date), 154703, 
+                    replace = T), 
+          origin = '1970-01-01')
+# transforms back df from list because as.Date transforms df in a list
+df <-bind_rows(df)
+
 # current dir is empty?
 rm(list = ls())
 
@@ -258,7 +267,7 @@ scale_colour_identity(guide = 'legend',labels = c('value', 'trafic')) +
 scale_colour_manual(name="Error Bars",values=cols, 
                       guide = guide_legend(override.aes=aes(fill=NA))) + 
 
-#If you make bar graphs with an outline (by setting colour=”black”), it will draw a slash through the colors in the legend. To remove them
+#If you make bar graphs with an outline (by setting colour=Â”blackÂ”), it will draw a slash through the colors in the legend. To remove them
 geom_bar(....., show.legend=FALSE) +
 
 #working with legends
