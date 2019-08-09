@@ -1,3 +1,8 @@
+# apply sapply to a df as store the result in a df
+result <-sapply(df, function(x) is.na(x) | x!='')
+df.result <- data.frame(result)
+
+
 # samples Date type as a column in a df
 start_date <- as.Date('2018-08-01')  
 end_date <- as.Date('2018-08-31')   
