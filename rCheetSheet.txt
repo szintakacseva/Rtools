@@ -1,3 +1,6 @@
+# create a column by sampling a character list
+df$column<-sample(c("RU", "AM", "BG", "BY", "CZ"), nrOfobs, replace = TRUE)
+
 # apply sapply to a df as store the result in a df
 result <-sapply(df, function(x) is.na(x) | x!='')
 df.result <- data.frame(result)
