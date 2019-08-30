@@ -1,3 +1,7 @@
+# nr of differences in two columns
+# df.missing <- data.frame(records =setdiff(df1$column, df2$column))
+# df.superflous <- data.frame(records =setdiff(df2$patnum, df1$patnum))
+
 # create a column by sampling a character list
 df$column<-sample(c("RU", "AM", "BG", "BY", "CZ"), nrOfobs, replace = TRUE)
 
